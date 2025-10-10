@@ -1,0 +1,13 @@
+@startuml c4-context-diagram
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+Title "Context Diagram"
+
+Person_Ext(user, "User")
+System(rag_project, "RAG Project")
+System_Ext(yandex_ia, "Yandex AI")
+
+Rel(user, rag_project, "Prompt", "HTTP")
+Rel(rag_project, yandex_ia, "augmented prompt", "HTTP")
+
+@enduml

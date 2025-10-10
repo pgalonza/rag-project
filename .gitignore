@@ -1,0 +1,19 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[codz]
+*$py.class
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Custom
+
+.env
+venv
+/app
+/data_collector
+/data_manager
+/init-postgresql
+/qdrant_data
+/dataset.csv

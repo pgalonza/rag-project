@@ -1,0 +1,28 @@
+@startuml c4-container-diagram
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+Title "Container Diagram"
+
+Person_Ext(user, "User")
+System_Ext(yandex_ia, "Yandex AI")
+
+System_Boundary(rag_project, "RAG Project"){
+    Container(data_vector_manager, "Data Vector Manager", "Flask")
+    Container(augmented_generation, "Augmented Generation", "Flask")
+    Container(llm_audit, "LLM Audit", "Flask")
+    ContainerDb(qdrant, "Vector DB", "Qdrant")
+    ContainerDb(api_gateway, "API Gateway", "Nginx")
+
+    Rel(augmented_generation, data_vector_manager, "", "HTTP")
+    Rel_D(data_vector_manager, qdrant, "", "HTTP")
+    Rel(augmented_generation, llm_audit, "", "HTTP")
+    Rel(api_gateway, augmented_generation, "", "HTTP")
+
+    Rel(augmented_generation, api_gateway, "External AI", "HTTP")
+    Rel(data_vector_manager, api_gateway, "External AI", "HTTP")
+    Rel(llm_audit, api_gateway, "External AI", "HTTP")
+}
+Rel_L(api_gateway, yandex_ia, "", "HTTP")
+Rel_D(user, api_gateway, "", "HTTP")
+
+@enduml

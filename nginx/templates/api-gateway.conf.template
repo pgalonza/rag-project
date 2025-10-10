@@ -1,0 +1,23 @@
+server {
+    listen 8080;
+    server_name ${NGINX_HOST};
+
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+
+    location /generation/ {
+        proxy_pass ${GENERATION_SERVICE_URL}/;
+    }
+
+}
+
+server {
+    listen 8081;
+    server_name ${NGINX_HOST};
+
+    location /yandex-llm/ {
+        proxy_pass ${YANDEX_LLM_URL}/;
+    }
+
+}
