@@ -1,6 +1,7 @@
 import os
 from flask import Flask
 from app.utils import exceptions, middleware, logging_config
+from flasgger import Swagger
 
 def create_app(config_name=None):
     # Load configuration based on environment
@@ -11,6 +12,7 @@ def create_app(config_name=None):
     from config import config
 
     app = Flask(__name__)
+    Swagger(app)
     app.config.from_object(config[config_name])
 
     logging_config.configure_logging(app)

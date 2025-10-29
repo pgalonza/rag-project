@@ -7,6 +7,41 @@ document_blueprints = Blueprint('documents', __name__, url_prefix="/api/v1")
 
 @document_blueprints.route('/documents', methods=['POST'])
 def create_document():
+    """
+    Create a new document.
+    ---
+    parameters:
+      - in: body
+        name: document
+        schema:
+          id: Document
+          type: array
+          required:
+            - content
+          items:
+            type: object
+            properties:
+              content:
+                type: string
+                description: The content of the document.
+                example: This is the content of the document.
+              metadata:
+                type: object
+                description: Metadata for the document.
+                properties:
+                  key:
+                    type: string
+                    description: The key of the metadata.
+                  value:
+                    type: string
+                    description: The value of the metadata.
+    responses:
+      201:
+        description: Document created successfully.
+      400:
+        description: Bad request.
+    """
+
     current_app.logger.info("Creating new document(s)")
     data = request.get_json()
 
@@ -20,8 +55,25 @@ def create_document():
     current_app.logger.info("Successfully created %d document(s)", len(result) if isinstance(result, list) else 1)
     return jsonify(result), 201
 
+
 @document_blueprints.route('/documents', methods=['GET'])
 def get_documents():
+    """
+    Get documents by ID.
+    ---
+    parameters:
+      - in: query
+        name: ids
+        type: string
+        required: true
+        description: Comma-separated list of document IDs.
+    responses:
+      200:
+        description: Documents fetched successfully.
+      400:
+        description: Bad request.
+    """
+
     ids = request.args.get('ids')
     current_app.logger.info("Fetching documents with ids: %s", ids)
 
@@ -44,8 +96,30 @@ def get_documents():
     current_app.logger.info("Successfully fetched %d document(s)", len(result))
     return jsonify(result), 200
 
+
 @document_blueprints.route('/documents/search', methods=['GET'])
 def search_documents():
+    """
+    Search documents by query.
+    ---
+    parameters:
+      - in: query
+        name: query
+        type: string
+        required: true
+        description: The query to search for.
+      - in: query
+        name: number
+        type: integer
+        default: 4
+        description: The number of documents to return.
+    responses:
+      200:
+        description: Documents fetched successfully.
+      400:
+        description: Bad request.
+    """
+
     query = request.args.get('query')
     number_of_docs = request.args.get('number', 4)
 

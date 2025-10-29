@@ -7,6 +7,24 @@ generation_blueprint = Blueprint('generation', __name__, url_prefix="/api/v1")
 
 @generation_blueprint.route('/generation', methods=['GET'])
 def augmented_generation():
+    """
+    Augmented generation endpoint.
+    ---
+    parameters:
+      - name: prompt
+        in: query
+        type: string
+        required: true
+        description: User prompt
+    responses:
+      200:
+        description: Generated text
+      400:
+        description: Invalid prompt
+      500:
+        description: Internal server error
+    """
+
     user_prompt = request.args.get('prompt')
     # Sanitize input
     user_prompt = validators.sanitize_input(user_prompt)

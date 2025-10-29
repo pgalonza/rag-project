@@ -10,6 +10,35 @@ executor = ThreadPoolExecutor()
 
 @estimation_blueprint.route('/estimate', methods=['POST'])
 def estimate_similarity():
+    """
+    Estimate cosine similarity between augmented prompt and generated text.
+    ---
+    parameters:
+      - in: body
+        name: estimation
+        schema:
+          id: Estimation
+          required:
+            - user_prompt
+            - augmented_prompt
+            - generated_text
+          properties:
+            user_prompt:
+              type: string
+              description: User prompt
+            augmented_prompt:
+              type: string
+              description: Augmented prompt
+            generated_text:
+              type: string
+              description: Generated text
+    responses:
+      200:
+        description: Cosine similarity estimation successful
+       500:
+        description: Internal server error
+    """
+
     data = request.get_json()
 
     if not data:
