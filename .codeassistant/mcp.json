@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "modern-remote-server": {
+      "type": "streamable-http",
+      "url": "http://localhost:3000/mcp",
+      "alwaysAllow": ["search_documents"],
+      "disabled": false
+    }
+  }
+}
