@@ -45,7 +45,7 @@ def get_documents():
     return jsonify(result), 200
 
 @document_blueprints.route('/documents/search', methods=['GET'])
-def search_document():
+def search_documents():
     query = request.args.get('query')
     number_of_docs = request.args.get('number', 4)
 
