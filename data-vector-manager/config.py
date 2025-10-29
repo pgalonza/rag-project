@@ -1,10 +1,11 @@
 import os
 
 class Config:
+    SERVER_NAME = '127.0.0.1:8001'
     DEBUG = False
     TESTING = False
-    COLLECTION_NAME="data"
-    QDRANT_URL= os.environ.get("QDRANT_URL", "http://localhost:6333")
+    COLLECTION_NAME=os.environ.get("COLLECTION_NAME", "data")
+    QDRANT_URL = os.environ.get("QDRANT_URL", "http://localhost:6333")
 
     # Security headers
     SECURITY_HEADERS = {
