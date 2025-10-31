@@ -22,7 +22,7 @@ WORKDIR /app
 
 ADD --chown=adduser:adduser . /app/
 
-RUN --mount=type=cache,destination=/appuser/.cache/uv <<EOF
+RUN --mount=type=cache,destination=/home/appuser/.cache/uv <<EOF
 uv sync --locked
 EOF
 
