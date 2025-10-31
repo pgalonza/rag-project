@@ -1,6 +1,8 @@
 import os
 
 class Config:
+    """Base configuration class."""
+    SERVER_NAME = os.environ.get("SERVER_NAME", '127.0.0.1:8003')
     YC_FOLDER_ID = os.environ.get("YC_FOLDER_ID")
     MODEL_NAME = "yandexgpt-lite"
 

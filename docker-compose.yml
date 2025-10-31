@@ -48,6 +48,20 @@ services:
     expose:
       - 8002
 
+  llm-audit:
+    build:
+      context: ./llm-audit
+      dockerfile: ../Dockerfile
+    environment:
+      SERVER_NAME: 0.0.0.0:8003
+      FLASK_ENV: development
+    env_file:
+      - ./llm-audit/.env
+    ports:
+      - 8003:8003
+    expose:
+      - 8003
+
 configs:
   qdrant_config:
     content: |
