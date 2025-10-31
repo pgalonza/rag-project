@@ -1,7 +1,9 @@
 # syntax=docker/dockerfile:1
 FROM python:3.13-alpine
 
-ENV UV_PYTHON_DOWNLOADS=never
+ENV UV_PYTHON_DOWNLOADS=never \
+    TZ="Europe/Moscow" \
+    LANG="en_US.UTF-8"
 
 SHELL ["/bin/sh", "-exc"]
 
