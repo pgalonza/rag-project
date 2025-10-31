@@ -32,6 +32,22 @@ services:
     depends_on:
       - qdrant
 
+  augmented-generation:
+    build:
+      context: ./augmented-generation
+      dockerfile: ../Dockerfile
+    environment:
+      SERVER_NAME: 0.0.0.0:8002
+      FLASK_ENV: development
+      DOCUMENTS_SEARCH_URL: http://data-vector-manager:8001/api/v1/documents/search
+      LLM_ESTIMATION_URL: http://llm-audit:8003/api/v1/estimate
+    env_file:
+      - ./augmented-generation/.env
+    ports:
+      - 8002:8002
+    expose:
+      - 8002
+
 configs:
   qdrant_config:
     content: |
