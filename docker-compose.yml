@@ -62,6 +62,22 @@ services:
     expose:
       - 8003
 
+  mcp-server:
+    build:
+      context: ./mcp-server
+      dockerfile: ../Dockerfile
+    environment:
+      RAG_URL: http://augmented-generation:8002/api/v1/generation
+    command:
+      - uv
+      - run
+      - fastmcp
+      - run
+    ports:
+      - 3000:3000
+    expose:
+      - 3000
+
 configs:
   qdrant_config:
     content: |
