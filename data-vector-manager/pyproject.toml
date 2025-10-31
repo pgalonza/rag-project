@@ -10,6 +10,7 @@ dependencies = [
     "langchain>=1.0.2",
     "langchain-community>=0.4.1",
     "langchain-qdrant>=1.1.0",
+    "python-dotenv>=1.2.1",
     "qdrant-client>=1.15.1",
-    "yandex-cloud-ml-sdk>=0.16.0",
+    "yandexcloud>=0.365.0",
 ]

@@ -3,15 +3,6 @@ revision = 3
 requires-python = ">=3.13"
 
 [[package]]
-name = "aiofiles"
-version = "25.1.0"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/41/c3/534eac40372d8ee36ef40df62ec129bee4fdb5ad9706e58a29be53b2c970/aiofiles-25.1.0.tar.gz", hash = "sha256:a8d728f0a29de45dc521f18f07297428d56992a742f0cd2701ba86e44d23d5b2", size = 46354, upload-time = "2025-10-09T20:51:04.358Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/bc/8a/340a1555ae33d7354dbca4faa54948d76d89a27ceef032c8c3bc661d003e/aiofiles-25.1.0-py3-none-any.whl", hash = "sha256:abe311e527c862958650f9438e859c1fa7568a141b22abcd015e120e86a85695", size = 14668, upload-time = "2025-10-09T20:51:03.174Z" },
-]
-
-[[package]]
 name = "aiohappyeyeballs"
 version = "2.6.1"
 source = { registry = "https://pypi.org/simple" }
@@ -322,8 +313,9 @@ dependencies = [
     { name = "langchain" },
     { name = "langchain-community" },
     { name = "langchain-qdrant" },
+    { name = "python-dotenv" },
     { name = "qdrant-client" },
-    { name = "yandex-cloud-ml-sdk" },
+    { name = "yandexcloud" },
 ]
 
 [package.metadata]
@@ -333,8 +325,9 @@ requires-dist = [
     { name = "langchain", specifier = ">=1.0.2" },
     { name = "langchain-community", specifier = ">=0.4.1" },
     { name = "langchain-qdrant", specifier = ">=1.1.0" },
+    { name = "python-dotenv", specifier = ">=1.2.1" },
     { name = "qdrant-client", specifier = ">=1.15.1" },
-    { name = "yandex-cloud-ml-sdk", specifier = ">=0.16.0" },
+    { name = "yandexcloud", specifier = ">=0.365.0" },
 ]
 
 [[package]]
@@ -464,15 +457,6 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/89/76/c615883b7b521ead2944bb3480398cbb07e12b7b4e4d073d3752eb721558/frozenlist-1.8.0-cp314-cp314t-win_amd64.whl", hash = "sha256:06be8f67f39c8b1dc671f5d83aaefd3358ae5cdcf8314552c57e7ed3e6475bdd", size = 49451, upload-time = "2025-10-06T05:37:53.425Z" },
     { url = "https://files.pythonhosted.org/packages/e0/a3/5982da14e113d07b325230f95060e2169f5311b1017ea8af2a29b374c289/frozenlist-1.8.0-cp314-cp314t-win_arm64.whl", hash = "sha256:102e6314ca4da683dca92e3b1355490fed5f313b768500084fbe6371fddfdb79", size = 42507, upload-time = "2025-10-06T05:37:54.513Z" },
     { url = "https://files.pythonhosted.org/packages/9a/9a/e35b4a917281c0b8419d4207f4334c8e8c5dbf4f3f5f9ada73958d937dcc/frozenlist-1.8.0-py3-none-any.whl", hash = "sha256:0c18a16eab41e82c295618a77502e17b195883241c563b00f0aa5106fc4eaa0d", size = 13409, upload-time = "2025-10-06T05:38:16.721Z" },
-]
-
-[[package]]
-name = "get-annotations"
-version = "0.1.2"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/61/6e/265083c3bc64f17b7bc52e8c3720739841772e81b44272b8ba12d46a01ce/get-annotations-0.1.2.tar.gz", hash = "sha256:da7b69b8043237cc7f7ce5919e9cc59bd18fc4e2704b43eb34e3ba4fa9374bab", size = 4506, upload-time = "2021-12-27T06:42:40.22Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/c6/42/9515026b884c7d5877c610082d35bcbad4f8ff4dfbf31aff0fe914f7ff3d/get_annotations-0.1.2-py3-none-any.whl", hash = "sha256:788ba8aa2434ee34ffb985c4aea2f9e575204c884c0e0dd0f969be846470e527", size = 4482, upload-time = "2021-12-27T06:42:41.79Z" },
 ]
 
 [[package]]
@@ -1797,25 +1781,6 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/9a/9a/c19c42c5b3f5a4aad748a6d5b4f23df3bed7ee5445accc65a0fb3ff03953/xxhash-3.6.0-cp314-cp314t-win32.whl", hash = "sha256:5851f033c3030dd95c086b4a36a2683c2ff4a799b23af60977188b057e467119", size = 31586, upload-time = "2025-10-02T14:36:15.603Z" },
     { url = "https://files.pythonhosted.org/packages/03/d6/4cc450345be9924fd5dc8c590ceda1db5b43a0a889587b0ae81a95511360/xxhash-3.6.0-cp314-cp314t-win_amd64.whl", hash = "sha256:0444e7967dac37569052d2409b00a8860c2135cff05502df4da80267d384849f", size = 32526, upload-time = "2025-10-02T14:36:16.708Z" },
     { url = "https://files.pythonhosted.org/packages/0f/c9/7243eb3f9eaabd1a88a5a5acadf06df2d83b100c62684b7425c6a11bcaa8/xxhash-3.6.0-cp314-cp314t-win_arm64.whl", hash = "sha256:bb79b1e63f6fd84ec778a4b1916dfe0a7c3fdb986c06addd5db3a0d413819d95", size = 28898, upload-time = "2025-10-02T14:36:17.843Z" },
-]
-
-[[package]]
-name = "yandex-cloud-ml-sdk"
-version = "0.16.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "aiofiles" },
-    { name = "get-annotations" },
-    { name = "grpcio" },
-    { name = "httpx" },
-    { name = "httpx-sse" },
-    { name = "packaging" },
-    { name = "typing-extensions" },
-    { name = "yandexcloud" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/7a/56/20eb63f864b4452d5b811f1bcd8e39f3b7026cb0e9ab523fe5350c1a61ef/yandex_cloud_ml_sdk-0.16.0.tar.gz", hash = "sha256:8db852ba0f5e7cf8e2cecec010c3a5205a561f283799917c83a35819ef0753c0", size = 15617012, upload-time = "2025-09-23T16:27:39.171Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/ef/9d/cb892e04fa51bb8f050011032dc26cc7e3b1c65d36550a7e2ae63bb4b3bb/yandex_cloud_ml_sdk-0.16.0-py3-none-any.whl", hash = "sha256:be62a24d5c4c46d0ba908a8b81ee30b8a58758422d9e4d424cfa83b372783c2a", size = 192586, upload-time = "2025-09-23T16:27:34.761Z" },
 ]
 
 [[package]]
