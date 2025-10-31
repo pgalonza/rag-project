@@ -1,0 +1,13 @@
+[project]
+name = "augmented-generation"
+version = "0.1.0"
+description = "It is a service for generating context-based responses from a database."
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "flasgger>=0.9.7.1",
+    "flask>=3.1.2",
+    "langchain>=1.0.2",
+    "python-dotenv>=1.2.1",
+    "yandex-cloud-ml-sdk>=0.16.0",
+]
