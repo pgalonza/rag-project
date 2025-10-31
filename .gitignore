@@ -11,6 +11,7 @@ instance/
 
 .env
 venv
+.venv
 /app
 /data_collector
 /data_manager

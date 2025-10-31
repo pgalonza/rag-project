@@ -1,0 +1,15 @@
+[project]
+name = "data-vector-manager"
+version = "0.1.0"
+description = "This is a service for work with vector database."
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "flasgger>=0.9.7.1",
+    "flask>=3.1.2",
+    "langchain>=1.0.2",
+    "langchain-community>=0.4.1",
+    "langchain-qdrant>=1.1.0",
+    "qdrant-client>=1.15.1",
+    "yandex-cloud-ml-sdk>=0.16.0",
+]
