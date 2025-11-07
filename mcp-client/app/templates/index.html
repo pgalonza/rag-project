@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCP Chat with YandexGPT</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .chat-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .chat-messages {
+            height: 400px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: #fafafa;
+        }
+        
+        .message {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        
+        .user-message {
+            background-color: #007bff;
+            color: white;
+            text-align: right;
+        }
+        
+        .bot-message {
+            background-color: #e9ecef;
+            color: #333;
+        }
+        
+        .input-container {
+            display: flex;
+            gap: 10px;
+        }
+        
+        #message-input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        #send-button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        #send-button:hover {
+            background-color: #0056b3;
+        }
+        
+        #send-button:disabled {
+            background-color: #6c757d;
+            cursor: not-allowed;
+        }
+        
+        .typing-indicator {
+            display: none;
+            color: #6c757d;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <h1>MCP Chat with YandexGPT</h1>
+    
+    <div class="chat-container">
+        <div class="chat-messages" id="chat-messages">
+            <div class="message bot-message">
+                Hello! I'm your assistant powered by MCP and YandexGPT. How can I help you today?
+            </div>
+        </div>
+        
+        <div class="typing-indicator" id="typing-indicator">
+            Thinking...
+        </div>
+        
+        <div class="input-container">
+            <input type="text" id="message-input" placeholder="Type your message here..." autocomplete="off">
+            <button id="send-button">Send</button>
+        </div>
+    </div>
+    
+    <script>
+        const chatMessages = document.getElementById('chat-messages');
+        const messageInput = document.getElementById('message-input');
+        const sendButton = document.getElementById('send-button');
+        const typingIndicator = document.getElementById('typing-indicator');
+        
+        function addMessage(message, isUser) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message');
+            messageDiv.classList.add(isUser ? 'user-message' : 'bot-message');
+            messageDiv.textContent = message;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        
+        async function sendMessage() {
+            const message = messageInput.value.trim();
+            if (!message) return;
+            
+            // Add user message to chat
+            addMessage(message, true);
+            messageInput.value = '';
+            
+            // Show typing indicator
+            typingIndicator.style.display = 'block';
+            sendButton.disabled = true;
+            
+            try {
+                // Send message to backend
+                const response = await fetch('/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ message: message })
+                });
+                
+                const data = await response.json();
+                
+                // Hide typing indicator
+                typingIndicator.style.display = 'none';
+                sendButton.disabled = false;
+                
+                if (response.ok) {
+                    addMessage(data.response, false);
+                } else {
+                    addMessage('Error: ' + data.response, false);
+                }
+            } catch (error) {
+                // Hide typing indicator
+                typingIndicator.style.display = 'none';
+                sendButton.disabled = false;
+                
+                addMessage('Error: Failed to send message', false);
+                console.error('Error:', error);
+            }
+        }
+        
+        // Event listeners
+        sendButton.addEventListener('click', sendMessage);
+        
+        messageInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+        
+        // Focus input on load
+        messageInput.focus();
+    </script>
+</body>
+</html>

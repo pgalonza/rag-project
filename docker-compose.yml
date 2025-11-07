@@ -78,6 +78,21 @@ services:
     expose:
       - 3000
 
+  mcp-client:
+    build:
+      context: ./mcp-client
+      dockerfile: ../Dockerfile
+    environment:
+      SERVER_NAME: 0.0.0.0:8004
+      FLASK_ENV: development
+      MCP_SEARCH_DOCUMENTS_URL: http://mcp-server:3000/mcp
+    env_file:
+      - ./llm-audit/.env
+    ports:
+      - 8004:8004
+    expose:
+      - 8004
+
 configs:
   qdrant_config:
     content: |
