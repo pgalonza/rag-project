@@ -4,6 +4,8 @@ FROM python:3.13-alpine
 ENV UV_PYTHON_DOWNLOADS=never \
     TZ="Europe/Moscow" \
     LANG="en_US.UTF-8"
+ARG app_user_name=appuser \
+    app_user_id=1000
 
 SHELL ["/bin/sh", "-exc"]
 
@@ -14,15 +16,15 @@ apk upgrade
 rm -rf /var/cache/apk/*
 EOF
 
-RUN adduser -D appuser
+RUN adduser -D $app_user_name -u $app_user_id
 
-USER appuser
+USER $app_user_name
 
 WORKDIR /app
 
-ADD --chown=adduser:adduser . /app/
+ADD --chown=$app_user_name:$app_user_name . /app/
 
-RUN --mount=type=cache,destination=/home/appuser/.cache/uv <<EOF
+RUN --mount=type=cache,destination=/home/$app_user_name/.cache/uv,uid=$app_user_id <<EOF
 uv sync --locked
 EOF
 
