@@ -18,4 +18,4 @@ venv
 /init-postgresql
 /qdrant_data
 /dataset.csv
-/training-ai.code-workspace
+/rag-project.code-workspace
