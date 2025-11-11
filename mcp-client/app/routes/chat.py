@@ -5,11 +5,11 @@ from app.utils import mcp_client
 chat_blueprint = Blueprint('chat', __name__, url_prefix="/")
 api_blueprint = Blueprint('api', __name__, url_prefix="/api/v1")
 @chat_blueprint.route('/')
-def index():
+async def index():
     return render_template('index.html')
 
 @chat_blueprint.route('/chat', methods=['POST'])
-def chat():
+async def chat():
     data = request.get_json()
     message = data.get('message', '')
 
@@ -18,7 +18,7 @@ def chat():
 
     try:
         # Use YandexGPT if configured, otherwise fall back to MCP client
-        response = mcp_client.send_message({"messages": [{"role": "user", "content": message}]})
+        response = await mcp_client.send_message({"messages": [{"role": "user", "content": message}]})
         return jsonify({'response': response})
     except Exception as e:
         return jsonify({'response': f'Error: {str(e)}'}), 500

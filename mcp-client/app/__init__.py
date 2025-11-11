@@ -2,6 +2,7 @@ import os
 from flask import Flask
 from app.utils import exceptions, middleware, logging_config, mcp_client
 from flasgger import Swagger
+import asyncio
 
 
 def create_app(config_name=None):
@@ -23,7 +24,10 @@ def create_app(config_name=None):
     from app.routes import chat, health
 
     with app.app_context():
-        mcp_client.init_agent()
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        loop.run_until_complete(mcp_client.init_agent())
+        loop.close()
         app.register_blueprint(chat.chat_blueprint)
         app.register_blueprint(health.health_blueprint)
 

@@ -13,7 +13,7 @@ import asyncio
 _agent = None
 
 
-def init_agent():
+async def init_agent():
     global _agent
     if _agent is None:
         chat_model = ChatOpenAI(
@@ -22,15 +22,15 @@ def init_agent():
             api_key=os.environ.get("YC_API_KEY"),
         )
         mcp_client = MultiServerMCPClient(current_app.config['MCP_SERVERS'])
-        tools = asyncio.run(mcp_client.get_tools())
+        tools = await mcp_client.get_tools()
         _agent = create_agent(model=chat_model, tools=tools, system_prompt=current_app.config['ASSISTENT_ROLE'])
     return _agent
 
-def send_message(message):
+async def send_message(message):
     global _agent
     if _agent is None:
         init_agent()
-    result = asyncio.run(_agent.ainvoke(message))
+    result = await _agent.ainvoke(message)
     answer_result = ""
     contents = [
         answer.content for answer in result['messages']
@@ -39,4 +39,3 @@ def send_message(message):
     ]
     answer_result = "\n".join(contents)
     return answer_result
-
