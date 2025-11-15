@@ -1,6 +1,6 @@
 # Retrieval Augmented Generation Project
 
-## ✎ TODO
+## 🗒 TODO
 
 - [ ] Migrate services from Flask to FastAPI
 - [ ] Switch the LangChain driver from Yandex to OpenAI
@@ -29,13 +29,7 @@
 ### Getting Started
 
 ```bash
-pip install -r requirements.txt
-```
-
-llm-audit
-
-```bash
-python -m spacy download ru_core_news_sm
+docker compose up -d
 ```
 
 ### Configuration
@@ -43,6 +37,18 @@ python -m spacy download ru_core_news_sm
 ```bash
 cp .env.example .env
 ```
+
+## 💻 System Endpoints Overview
+
+- Qdrant - http://localhost:6333
+- data-vector-manager - http://localhost:8001
+- augmentes-generation - http://localhost:8001
+- llm-audit - http://localhost:8003
+- mcp-server - http://localhost:3000
+- mcp-client - http://localhost:8004
+
+
+Swagger UI - /api/docs
 
 ## License
 
