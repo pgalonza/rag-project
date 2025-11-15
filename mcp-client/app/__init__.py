@@ -1,21 +1,24 @@
 import os
 from flask import Flask
+from typing import Optional
 from app.utils import exceptions, middleware, logging_config, mcp_client
 from flasgger import Swagger
 import asyncio
+from config import Config
 
 
-def create_app(config_name=None):
+def create_app(config_name: Optional[str] = None) -> Flask:
     # Load configuration based on environment
     if config_name is None:
-        config_name = os.environ.get('FLASK_ENV', 'default')
+        config_name: str = os.environ.get('FLASK_ENV', 'default')
 
     # Import config after app creation to avoid circular imports
     from config import config
 
-    app = Flask(__name__)
+    app: Flask = Flask(__name__)
     Swagger(app)
-    app.config.from_object(config[config_name])
+    config_obj: Config = config[config_name]
+    app.config.from_object(config_obj)
 
     logging_config.configure_logging(app)
     middleware.add_middleware(app)
@@ -24,7 +27,7 @@ def create_app(config_name=None):
     from app.routes import chat, health
 
     with app.app_context():
-        loop = asyncio.new_event_loop()
+        loop: asyncio.AbstractEventLoop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
         loop.run_until_complete(mcp_client.init_agent())
         loop.close()

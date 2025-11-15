@@ -1,9 +1,10 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, Response
+from typing import Any, Dict, Tuple
 
-health_blueprint = Blueprint('health', __name__)
+health_blueprint: Blueprint = Blueprint('health', __name__)
 
 @health_blueprint.route('/health', methods=['GET'])
-def health_check():
+def health_check() -> Tuple[Response, int]:
     """
     Health check endpoint.
     ---
@@ -11,7 +12,8 @@ def health_check():
       200:
         description: Service is healthy
     """
-    return jsonify({
+    response_data: Dict[str, str] = {
         'status': 'healthy',
         'service': 'augmented-generation-api'
-    }), 200
+    }
+    return jsonify(response_data), 200
