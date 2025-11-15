@@ -1,5 +1,14 @@
 # Retrieval Augmented Generation Project
 
+## ✎ TODO
+
+- [ ] Migrate services from Flask to FastAPI
+- [ ] Switch the LangChain driver from Yandex to OpenAI
+- [ ] Implement unit tests
+- [ ] Split the augmented‑generation component into two separate services
+- [ ] Add an API gateway
+
+
 ## 📋 Overview
 
 ### 🏗️ Components
